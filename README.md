@@ -10,12 +10,6 @@ TideFinger，一个开源的指纹识别小工具，使用了传统和现代检�
 
 通过分析web指纹的检测对象、检测方法、检测原理及常用工具，设计了一个简易的指纹搜集脚本来协助发现新指纹，并提取了多个开源指纹识别工具的规则库并进行了规则重组，开发了一个简单快捷的指纹识别小工具TideFinger，并实现了一套在线的指纹识别平台“潮汐指纹” [http://finger.tidesec.net](http://finger.tidesec.net)，希望能为大家带来方便。
 
-另外，我们会不定期更新指纹库，关注我们最下方公众号，回复“web指纹库”即可获取最新的的指纹库。
-
-我们把指纹识别相关的一些原理、工具汇总成了一篇文章，详见[《Web指纹识别技术研究与优化实现》](https://github.com/TideSec/TideFinger/blob/master/Web%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6%E4%B8%8E%E4%BC%98%E5%8C%96%E5%AE%9E%E7%8E%B0.md)。
-
-# 安装
-
 通过对各种识别对象、识别方法、识别工具的分析，发现大家的指纹库各式各样，识别方式也是各有千秋，传统的md5、url路径的方式居多，识别header信息的也是不少，但没有一个能集众家之长的小工具和指纹库。
 
 于是我们参考了webfinger和whatcms的部分代码并进行了整合优化，做了一个小工具TideFinger。
@@ -23,6 +17,14 @@ TideFinger，一个开源的指纹识别小工具，使用了传统和现代检�
 ```
 https://github.com/TideSec/TideFinger
 ```
+
+另外，我们会不定期更新指纹库，关注我们最下方公众号，回复“web指纹库”即可获取最新的的指纹库。
+
+我们把指纹识别相关的一些原理、工具汇总成了一篇文章，详见[《Web指纹识别技术研究与优化实现》](https://github.com/TideSec/TideFinger/blob/master/Web%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6%E4%B8%8E%E4%BC%98%E5%8C%96%E5%AE%9E%E7%8E%B0.md)。
+
+# 安装
+
+1、识别脚本的安装和使用都比较简单。
 
 安装python2依赖库
 ```
@@ -33,7 +35,7 @@ pip install bs4
 说明：sqlite3库在Python 2.5.x 以上版本默认自带了该模块，如提示sqlite3出错请自行排查。
 ```
 
-执行脚本
+2、执行脚本
 ```
 $ python TideFinger.py
 
@@ -48,6 +50,7 @@ $ python TideFinger.py
 指纹识别界面如下：
 
 <img src=images/022.png >
+
 
 # 技术原理及实现
 
@@ -141,5 +144,6 @@ $ python TideFinger.py
 
 **TideSec安全团队：**
 
-![pic](images/ewm.png)
+
+<div align=center><img src=images/ewm.png width=30% ></div>
 
