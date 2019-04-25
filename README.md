@@ -137,4 +137,9 @@ $ python TideFinger.py
 4、下一步尝试对http头进行语义分析，从海量网站中提取分析header的共性，更高效的发现未知指纹。
 
 
+# 关注我们
+
+**TideSec安全团队：**
+
+![pic](images/ewm.png)
 
