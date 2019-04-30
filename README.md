@@ -18,7 +18,7 @@ TideFinger，一个开源的指纹识别小工具，使用了传统和现代检�
 https://github.com/TideSec/TideFinger
 ```
 
-另外，我们会不定期更新指纹库，关注我们最下方公众号，回复“web指纹库”即可获取最新的的指纹库。
+**另外，我们会不定期更新指纹库，关注我们最下方公众号，回复“指纹库”即可获取最新的的指纹库。**
 
 我们把指纹识别相关的一些原理、工具汇总成了一篇文章，详见[《Web指纹识别技术研究与优化实现》](https://github.com/TideSec/TideFinger/blob/master/Web%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6%E4%B8%8E%E4%BC%98%E5%8C%96%E5%AE%9E%E7%8E%B0.md)。
 
