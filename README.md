@@ -147,3 +147,7 @@ $ python TideFinger.py
 
 <div align=center><img src=images/ewm.png width=30% ></div>
 
+
+**关注我：**
+
+<div align=center><img src=images/zjwf.png width=30% ></div>
