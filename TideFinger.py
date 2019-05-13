@@ -506,7 +506,7 @@ if __name__ == "__main__":
                 else:
                     print "读取代理列表出错，请确保代理文件名为proxys_ips.txt,每行一条代理，格式如: 124.225.223.101:80"
 
-            if re.match(r'^http?:/{2}\w.+$', target_url):
+            if re.match(r'^https?:/{2}\w.+$', target_url):
                 print '\n'
                 print "Current Task: ",target_url
                 daytime = time.strftime('%Y-%m-%d', time.localtime(time.time()))
