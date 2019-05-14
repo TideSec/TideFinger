@@ -25,9 +25,8 @@ except:
 
 
 # Check py version
-pyversion = sys.version.split()[0]
-if pyversion >= "3" or pyversion < "2.7":
-    exit('Need python version 2.6.x or 2.7.x')
+if sys.version_info[:2] != (2, 7):
+    exit('Need Python 2.7')
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
