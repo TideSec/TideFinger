@@ -166,6 +166,3 @@ Tide安全团队正式成立于2019年1月，是以互联网攻防技术研究�
 
 <div align=center><img src=images/ewm.png width=30% ></div>
 
-**和我联系：**
-
-<div align=center><img src=images/zjwf.png width=30% ></div>
