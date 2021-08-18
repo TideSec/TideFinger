@@ -3,12 +3,11 @@
 
 # TideFinger
 
-
 TideFinger，一个开源的指纹识别小工具，使用了传统和现代检测技术相结合的指纹检测方法，让指纹检测更快捷、准确。
 
 # 前言
 
-通过分析web指纹的检测对象、检测方法、检测原理及常用工具，设计了一个简易的指纹搜集脚本来协助发现新指纹，并提取了多个开源指纹识别工具的规则库并进行了规则重组，开发了一个简单快捷的指纹识别小工具TideFinger，并实现了一套在线的指纹识别平台“潮汐指纹” [http://finger.tidesec.net](http://finger.tidesec.net)，希望能为大家带来方便。
+通过分析web指纹的检测对象、检测方法、检测原理及常用工具，设计了一个简易的指纹搜集脚本来协助发现新指纹，并提取了多个开源指纹识别工具的规则库并进行了规则重组，开发了一个简单快捷的指纹识别小工具TideFinger，并实现了一套在线的指纹识别平台“潮汐指纹” [http://finger.tidesec.com](http://finger.tidesec.com)，希望能为大家带来方便。
 
 通过对各种识别对象、识别方法、识别工具的分析，发现大家的指纹库各式各样，识别方式也是各有千秋，传统的md5、url路径的方式居多，识别header信息的也是不少，但没有一个能集众家之长的小工具和指纹库。
 
@@ -18,19 +17,51 @@ TideFinger，一个开源的指纹识别小工具，使用了传统和现代检�
 https://github.com/TideSec/TideFinger
 ```
 
-**另外，我们会不定期更新指纹库，关注我们最下方公众号，回复“指纹库”即可获取最新的的指纹库。**
+**另外，我会不定期更新指纹库，关注我们最下方公众号，回复“指纹库”即可获取最新的的指纹库。**
 
-我们把指纹识别相关的一些原理、工具汇总成了一篇文章，详见[《Web指纹识别技术研究与优化实现》](https://github.com/TideSec/TideFinger/blob/master/Web%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6%E4%B8%8E%E4%BC%98%E5%8C%96%E5%AE%9E%E7%8E%B0.md)。
+我把指纹识别相关的一些原理、工具汇总成了一篇文章，详见[《Web指纹识别技术研究与优化实现》](https://github.com/TideSec/TideFinger/blob/master/Web%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6%E4%B8%8E%E4%BC%98%E5%8C%96%E5%AE%9E%E7%8E%B0.md)。
 
-# 安装
+# 安装使用
+
+## python3版
+
+python3版加入了`Wappalyzer`的调用，并对结果进行了去重，同时加了目录匹配式选项，默认不会进行目录匹配方式的探测，因为这样会向目标系统发起大量的http请求。
+
+`Wappalyzer`指纹库的更新:`https://raw.githubusercontent.com/AliasIO/wappalyzer/master/src/technologies.json`，替换为对应的`technologies.json`文件即可。
+
+1、识别脚本的安装和使用都比较简单。
+
+安装python3依赖库
+```
+pip3 install -r requirements.txt  -i https://mirrors.aliyun.com/pypi/simple/
+
+说明：sqlite3库在Python3 以上版本默认自带了该模块，如提示sqlite3出错请自行排查。
+```
+
+2、执行脚本
+```
+$ python3 TideFinger.py
+
+    Usage: python3 TideFinger.py -u http://www.123.com [-p 1] [-m 50] [-t 5] [-d 0]
+
+    -u: 待检测目标URL地址
+    -p: 指定该选项为1后，说明启用代理检测，请确保代理文件名为proxys_ips.txt,每行一条代理，格式如: 124.225.223.101:80
+    -m: 指纹匹配的线程数，不指定时默认为50
+    -t: 网站响应超时时间，默认为5秒
+    -d: 是否启用目录匹配式指纹探测（会对目标站点发起大量请求），0为不启用，1为启用，默认为不启用。
+```
+
+指纹识别界面如下：
+
+<img src=images/025.png >
+
+## python2版
 
 1、识别脚本的安装和使用都比较简单。
 
 安装python2依赖库
 ```
-pip install lxml
-pip install requests
-pip install bs4
+pip install -r requirements.txt  -i https://mirrors.aliyun.com/pypi/simple/
 
 说明：sqlite3库在Python 2.5.x 以上版本默认自带了该模块，如提示sqlite3出错请自行排查。
 ```
@@ -75,7 +106,7 @@ $ python TideFinger.py
 
 于是想到了一个比较笨的方法：从网站中爬取一些静态文件，如png、ico、jpg、css、js等，提取url地址、文件名、计算md5写入数据库，这样再爬下一个网站，一旦发现有相同的md5，就把新的url也加入到那条记录中，并把hint值加1，这样爬取10W个站点后，就能得到一个比较客观的不同网站使用相同md5文件的数据了。
 
-有兴趣的可以查看具体代码`https://github.com/TideSec/TideFinger/blob/master/count_file_md5.py`文件。
+有兴趣的可以查看具体代码`https://github.com/TideSec/TideFinger/blob/master/python2/count_file_md5.py`文件。
 
 爬取的结果如下：
 
