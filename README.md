@@ -27,8 +27,6 @@ https://github.com/TideSec/TideFinger
 
 python3版加入了`Wappalyzer`的调用，并对结果进行了去重，同时加了目录匹配式选项，默认不会进行目录匹配方式的探测，因为这样会向目标系统发起大量的http请求。
 
-`Wappalyzer`指纹库的更新:`https://raw.githubusercontent.com/AliasIO/wappalyzer/master/src/technologies.json`，替换为对应的`technologies.json`文件即可。
-
 1、识别脚本的安装和使用都比较简单。
 
 安装python3依赖库
@@ -79,9 +77,53 @@ $ python TideFinger.py
 ```
 
 指纹识别界面如下：
-
 <img src=images/022.png >
 
+# 升级完善（2021.08）
+
+## 主要完善功能点
+
+1、**完成了python3的代码升级**。之前使用python2实现的，现在github里包含了python2和python3两个版本，可以根据自己环境去选。
+
+2、**升级了tidefinger的自身指纹库**，2020年的时候指纹大约为2100条，目前指纹文件`cms_finger.db`已包含大约5900条指纹。
+
+3、**引入了Wappalyzer指纹库**，使用了python版的Wappalyzer，代码来自`https://github.com/chorsley/python-Wappalyzer`。
+
+4、**引入了`webanalyzer`指纹库**，这个是国内一群安全爱好者做的一个很不错的项目，项目地址`https://github.com/webanalyzer/`，里面的role也集成了WhatWeb、Wappalyzer、fofa的规则等。
+
+5、因为多个指纹库都会有部分重合，所以后面对识别到的指纹进行了简单的去重处理，并对部分常见的误报进行了优化。
+
+6、py2版本中在无法识别到cms时会默认使用数据库文件遍历的方式进行进一步指纹识别，但这样会对目标站点发起大量请求，我现在已经基本不大用这种方式，所以py3版加了个-d的选项，0为不启用，1为启用，默认为不启用。
+
+## 新旧版本对比
+
+**python2版：**
+
+<img src=images/16294255548257.jpg >
+
+<img src=images/16294255369065.jpg >
+
+<img src=images/16294255091237.jpg >
+
+**python3新版：**
+
+<img src=images/16294257386932.jpg >
+
+<img src=images/16294257808047.jpg >
+
+<img src=images/16294258223684.jpg >
+
+python3新版本获取的指纹更多，默认对目标发送大约4-5个数据包，而且都是没有攻击特征的，相对来说还是是可以接受的。
+
+<img src=images/16294279226025.jpg >
+
+<img src=images/16294279658552.jpg >
+
+不大习惯自动化更新，所以指纹需要手动更新。
+
+`Wappalyzer`指纹库的更新:`https://raw.githubusercontent.com/AliasIO/wappalyzer/master/src/technologies.json`，替换为对应的`technologies.json`文件即可。
+
+`webanalyzer`指纹库的更新，指纹库`https://github.com/webanalyzer/rules`，替换到对应的`webanalyzer/rules`目录即可。
 
 # 技术原理及实现
 
@@ -182,10 +224,7 @@ $ python TideFinger.py
 
 2、指纹库下载
 
-我们在GitHub上提供的是2019年4月的指纹库（还未进行大量的命中率测试），后续我们还会优化调整命中策略、未知指纹识别方法，持续更新优化指纹库。
-
 最新指纹库的下载请关注我们公众号`TideSec安全团队`，回复“指纹库”即可获取最新指纹库下载地址。
-
 
 # 关注我们
 

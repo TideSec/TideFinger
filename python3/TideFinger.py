@@ -11,7 +11,7 @@ import threading,datetime
 import sys,re,sqlite3,lxml,urllib3
 from bs4 import BeautifulSoup as BS
 from Wappalyzer import Wappalyzer, WebPage
-
+from webanalyzer import webanalyzer
 
 # Check py version
 pyversion = sys.version.split()[0]
@@ -451,7 +451,6 @@ def useWappalyzer(url):
         webpage = WebPage.new_from_url(url)
         webprints = wappalyzer.analyze(webpage)
         if len(webprints) > 0:
-
             return list(webprints)
         else:
             return {}
@@ -525,31 +524,47 @@ if __name__ == "__main__":
                         # print(x)
                         banner.append(x)
                 except Exception as e:
-                    print("Wappalyzer error:",e)
+                    print("Wappalyzer check error:",e)
+                    pass
+
+                try:
+                    update = False
+                    webanalyzer_banner = webanalyzer.check(target_url,update)
+                    for webanalyzer_banner_ in webanalyzer_banner:
+                        banner.append(webanalyzer_banner_)
+                except Exception as e:
+                    print("Webanalyzer check error:",e)
                     pass
                 print("-"*50)
 
                 banner_tmp = []
+                # print("banner:",banner)
+                banner.sort()
                 banner_ = set(list(banner))
+                # print("banner_:",banner_)
 
                 for x in banner_:
                     if x:
-                        if str(x).lower() in str(banner_tmp).lower():
-                            pass
-                        else:
+                        flag = 0
+                        for y in banner_tmp:
+                            if str(x).lower() in str(y).lower() or str(y).lower() in str(x):
+                                flag = 1
+                                continue
+                        if flag == 0:
                             banner_tmp.append(x)
+
                 banner = banner_tmp
 
                 banner_all = ''
                 cms_name = ''
                 cms_name_flag = 0
                 for banner_tmp2 in banner:
-                    banner_all= banner_all + ' '+banner_tmp2
+                    banner_all= banner_all + ' | '+banner_tmp2
                     if banner_tmp2.lower() in cms_finger_list:
                         cms_name = banner_tmp2
                         cms_name_flag = 1
-
-                if banner_all.startswith(' '):
+                banner_all = banner_all.strip()
+                if banner_all.startswith('| '):
                     banner_all = banner_all[1:]
                 if banner_all:
                     print(R,"Banner:",W,G,banner_all,W)

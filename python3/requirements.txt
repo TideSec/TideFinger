@@ -1,3 +1,6 @@
-lxml
+lxml==4.2.5
 requests==2.24.0
 bs4==0.0.1
+html5lib==1.0.1
+urllib3==1.24.3
+aiohttp==3.6.2
