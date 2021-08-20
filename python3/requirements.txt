@@ -3,4 +3,4 @@ urllib3
 requests==2.24.0
 bs4==0.0.1
 html5lib==1.0.1
-aiohttp==3.6.2
+aiohttp==3.7.4
